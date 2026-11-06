@@ -130,3 +130,8 @@ jobs:
         run: |
           docker push "${IMAGE_NAME}:${GITHUB_SHA}"
           docker push "${IMAGE_NAME}:latest"
+
+      - name: Log out of GHCR
+        # self-hosted runner сохраняет ~/.docker/config.json между заданиями
+        if: always()
+        run: docker logout ghcr.io
